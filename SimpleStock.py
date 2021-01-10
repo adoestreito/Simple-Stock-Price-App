@@ -50,10 +50,11 @@ tickersOptions= [
      'ticker':'TSLA',
     },
 ]
+#Iterate to get all the tickerNames
 
 
-tickersOption = ('APPLE','MICROSOFT','TESLA')
-option = st.sidebar.selectbox('Select your ticket',tickersOptions)
+tickersNames = ('APPLE','MICROSOFT','TESLA')
+option = st.sidebar.selectbox('Select your ticket',tickersNames)
 if option == 'APPLE':
     tickerSymbol = 'AAPL'
     tickerSelected(tickerSymbol)
