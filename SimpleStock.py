@@ -39,11 +39,22 @@ st.write("""
 """)
 
 #define the ticker symbol
-option = st.selectbox('Select your ticket',('none','APPLE','MICROSOFT','TESLA'))
-if option == 'ALL':
-    tickerSymbol = 'aapl msft tsla'
-    tickerData = yf.Tickers(tickerSymbol)
-elif option == 'APPLE':
+tickersOptions= [
+    {'stockName': 'APPLE',
+     'ticker':'AAPL',
+    },
+    {'stockName': 'MICROSOFT',
+     'ticker':'MSFT',
+    },
+    {'stockName': 'TESLA',
+     'ticker':'TSLA',
+    },
+]
+
+
+tickersOption = ('APPLE','MICROSOFT','TESLA')
+option = st.sidebar.selectbox('Select your ticket',tickersOptions)
+if option == 'APPLE':
     tickerSymbol = 'AAPL'
     tickerSelected(tickerSymbol)
 elif option == 'MICROSOFT':
@@ -52,15 +63,6 @@ elif option == 'MICROSOFT':
 elif option == 'TESLA':
     tickerSymbol = 'tsla'
     tickerSelected(tickerSymbol)
-#Compare All
-if st.button('Compare all', key=None):
-    allSelected('AAPL MSFT TSLA')
-    
-
-
-
-
-# https://towardsdatascience.com/how-to-get-stock-data-using-python-c0de1df17e75
 
 
 
@@ -70,7 +72,3 @@ if st.button('Compare all', key=None):
 
 
 
-
-
-#What you neeed to do in conda
-#https://discuss.streamlit.io/t/command-not-found/741/3
