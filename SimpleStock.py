@@ -18,7 +18,7 @@ def tickerSelected(tickerSymbol):
     st.line_chart(tickerDf.Volume)
     st.line_chart(tickerDf.Dividends)
 
-def allSelected(tickerSymbol):
+def allSelected(tickerSymbol): 
         #get data on this ticker
     tickerData = yf.Tickers(tickerSymbol)
     tickerDf = tickerData.history('max')
@@ -49,21 +49,19 @@ tickersOptions= [
     {'stockName': 'TESLA',
      'ticker':'TSLA',
     },
+    {'stockName': 'FASTLY',
+     'ticker':'FSLY',
+    },
 ]
+stockNames = []
 #Iterate to get all the tickerNames
+for option in tickersOptions:
+    stockNames.append(option['stockName'])
 
-
-tickersNames = ('APPLE','MICROSOFT','TESLA')
-option = st.sidebar.selectbox('Select your ticket',tickersNames)
-if option == 'APPLE':
-    tickerSymbol = 'AAPL'
-    tickerSelected(tickerSymbol)
-elif option == 'MICROSOFT':
-    tickerSymbol = 'MSFT'
-    tickerSelected(tickerSymbol)
-elif option == 'TESLA':
-    tickerSymbol = 'tsla'
-    tickerSelected(tickerSymbol)
+option = st.sidebar.selectbox('Select your ticket',stockNames)
+for stock in tickersOptions:
+    if option == stock['stockName']:
+        tickerSelected(stock['ticker'])
 
 
 
