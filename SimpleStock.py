@@ -1,7 +1,8 @@
 import yfinance as yf
 import streamlit as st
+import datetime
 
-def allSelected(tickerSymbol): 
+def allSelected(tickerSymbol,date): 
     if len(tickerSymbol)==0:
         st.write("Use the menu on the left to select the stocks that you want to compare")
         return
@@ -10,7 +11,7 @@ def allSelected(tickerSymbol):
         
     else:
         tickerData = yf.Tickers(tickerSymbol)
-    tickerDf = tickerData.history('max')
+    tickerDf = tickerData.history(date)
     # Open	High	Low	Close	Volume	Dividends	Stock Splits
     st.write("""
     ## Close price""")
@@ -57,7 +58,14 @@ for choice in options:
     if choice == stock['stockName']:
         selectedTicker.append(stock['ticker'])
 
-allSelected(selectedTicker)
+date = st.sidebar.select_slider(
+    'Select the date range',
+    options=[ '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max']
+)
+st.write('You selected the date', date)
+
+allSelected(selectedTicker,date)
+
 
 
 
