@@ -11,6 +11,7 @@ def allSelected(tickerSymbol,date):
         
     else:
         tickerData = yf.Tickers(tickerSymbol)
+    st.write("Data range: "+date) 
     tickerDf = tickerData.history(date)
     # Open	High	Low	Close	Volume	Dividends	Stock Splits
     st.write("""
@@ -22,7 +23,6 @@ def allSelected(tickerSymbol,date):
     st.write("""
     ## Dividends""")
     st.line_chart(tickerDf.Dividends)
-
 
 st.write("""
 # Simple Stock Price App
@@ -42,6 +42,9 @@ tickersOptions= [
     {'stockName': 'FASTLY',
      'ticker':'FSLY',
     },
+    {'stockName': 'GOOGLE',
+     'ticker':'GOOG',
+    },
 ]
 stockNames = []
 selectedTicker = []
@@ -60,9 +63,7 @@ for choice in options:
 
 date = st.sidebar.select_slider(
     'Select the date range',
-    options=[ '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max']
-)
-st.write('You selected the date', date)
+    options=[ '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'])
 
 allSelected(selectedTicker,date)
 
