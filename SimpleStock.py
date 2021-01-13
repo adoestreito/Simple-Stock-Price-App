@@ -27,6 +27,7 @@ def allSelected(tickerSymbol,date):
 st.write("""
 # Simple Stock Price App
 """)
+#teeest
 
 #define the ticker symbol
 tickersOptions= [
