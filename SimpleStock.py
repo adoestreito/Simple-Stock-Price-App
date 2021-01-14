@@ -2,9 +2,9 @@ import yfinance as yf
 import streamlit as st
 import datetime
 
-def allSelected(tickerSymbol,date): 
+def allSelected(tickerSymbol,date,close,volume,dividens): 
     if len(tickerSymbol)==0:
-        st.write("Use the menu on the left to select the stocks that you want to compare")
+        st.info("Use the menu on the left to select the stocks that you want to compare")
         return
     elif len(tickerSymbol) == 1:
         tickerData = yf.Ticker(tickerSymbol[0])
@@ -14,15 +14,26 @@ def allSelected(tickerSymbol,date):
     st.write("Data range: "+date) 
     tickerDf = tickerData.history(date)
     # Open	High	Low	Close	Volume	Dividends	Stock Splits
-    st.write("""
-    ## Close price""")
-    st.area_chart(tickerDf.Close)
-    st.write("""
-    ## Volume""")
-    st.line_chart(tickerDf.Volume)
-    st.write("""
-    ## Dividends""")
-    st.line_chart(tickerDf.Dividends)
+    if close:
+        st.write("""
+        ## Close price""")
+        st.area_chart(tickerDf.Close)
+    if volume:
+        st.write("""
+        ## Volume""")
+        st.line_chart(tickerDf.Volume)
+    if dividens:
+        st.write("""
+        ## Dividends""")
+        st.line_chart(tickerDf.Dividends)
+    if not close and not volume and not dividens:
+        st.info("Select the data to be shown in the left bar")
+
+#End function
+
+#start app
+st.set_page_config(page_title="Simple Stock Price App", page_icon=None, layout='wide', initial_sidebar_state='auto')
+
 
 st.write("""
 # Simple Stock Price App
@@ -66,7 +77,16 @@ date = st.sidebar.select_slider(
     'Select the date range',
     options=[ '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'])
 
-allSelected(selectedTicker,date)
+st.sidebar.write("Select the data to be shown")
+close = st.sidebar.checkbox('Close price')
+volume = st.sidebar.checkbox('Volume')
+dividens = st.sidebar.checkbox('Dividends')
+
+
+
+    
+
+allSelected(selectedTicker,date,close,volume,dividens)
 
 
 
