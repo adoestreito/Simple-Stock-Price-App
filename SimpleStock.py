@@ -73,6 +73,11 @@ for choice in options:
     if choice == stock['stockName']:
         selectedTicker.append(stock['ticker'])
 
+userInput = st.sidebar.text_input("Input a ticker", value='', max_chars=None, key=None, type='default')
+if userInput:
+    selectedTicker.append(userInput)
+
+
 date = st.sidebar.select_slider(
     'Select the date range',
     options=[ '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'])
@@ -81,6 +86,8 @@ st.sidebar.write("Select the data to be shown")
 close = st.sidebar.checkbox('Close price')
 volume = st.sidebar.checkbox('Volume')
 dividens = st.sidebar.checkbox('Dividends')
+
+
 
 
 
