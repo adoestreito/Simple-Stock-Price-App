@@ -1,6 +1,9 @@
 # Simple-Stock-Price-App
+=========================
 
-Check the Close price, volume and Dividends of Microsoft, Google and Tesla.
+A small project using [yfinance](https://pypi.org/project/yfinance/) and Streamlit [streamlit](https://www.streamlit.io/) to check the close price, volume and dividends of Public traded companies.
+
+(/SimpleStockPriceApp.png "Simplee Stock Price App image")
 
 
 
